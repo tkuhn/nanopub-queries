@@ -1,0 +1,17 @@
+{
+  "proto": {
+      "id": "?orcid",
+      "name": "?name"
+  },
+  "$where": [
+    "?orcid <http://purl.org/ontology/bibo/editor> <https://content.iospress.com/journals/data-science/> . optional { ?orcid foaf:name ?name } ."
+  ],
+  "$orderby": [ "?orcid" ],
+  "grlc": "#+ summary: Getting editors of Data Science\n#+ endpoint: https://virtuoso.services.np.trustyuri.net/sparql\n#+ tags:\n#+   - json\n#+ method: GET\n#+ pagination: 50",
+  "$prefixes": {
+    "np" : "http://www.nanopub.org/nschema#",
+    "npa" : "http://purl.org/nanopub/admin/",
+    "npx" : "http://purl.org/nanopub/x/",
+    "dct" : "http://purl.org/dc/terms/"
+  }
+}
