@@ -1,0 +1,49 @@
+<html>
+<head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/json2html/2.1.0/json2html.min.js"></script>
+<script>
+        
+var getJson = function(url, callback) {
+  var request = new XMLHttpRequest();
+  request.open('GET', url, true);
+  request.responseType = 'json';
+  request.onload = function() {
+    var status = request.status;
+    if (status === 200) {
+      callback(null, request.response);
+    } else {
+      callback(status, request.response);
+    }
+  };
+  request.send();
+};
+
+var populate = function(elementId, apiUrl, template) {
+  getJson(apiUrl,
+    function(error, response) {
+      if (error == null) {
+        document.getElementById(elementId).innerHTML = json2html.render(response, template);
+      } else {
+        document.getElementById(elementId).innerHTML = "<li><em>error: something went wrong with calling the API</en></li>";
+      }
+    }
+  );
+};
+
+</script>
+
+</head>
+<body>
+
+<p>Editors of Data Science:</p>
+
+<ul id="list">
+<li><em>retrieving newer versions...</em></li>
+</ul>
+<script>
+populate("list",
+  'https://grlc.io/api-git/tkuhn/nanopub-queries/ds-editors',
+  {'<>':'li','html':'<code><a href="${id}">${id}</a></code>'});
+</script>
+
+</body>
