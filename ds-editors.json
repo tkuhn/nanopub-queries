@@ -7,7 +7,7 @@
     "?orcid <http://purl.org/ontology/bibo/editor> <https://content.iospress.com/journals/data-science/> . optional { ?orcid foaf:name ?name } ."
   ],
   "$orderby": [ "?orcid" ],
-  "grlc": "#+ summary: Getting the Data Science editors\n#+ endpoint: http://dbpedia.org/sparql\n#+ tags:\n#+   - json\n#+ method: GET\n#+ pagination: 50",
+  "grlc": "#+ summary: Getting the Data Science editors\n#+ tags:\n#+   - json\n#+ method: GET\n#+ pagination: 50",
   "$prefixes": {
     "np" : "http://www.nanopub.org/nschema#",
     "npa" : "http://purl.org/nanopub/admin/",
