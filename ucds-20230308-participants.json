@@ -5,7 +5,7 @@
       "person": "?person"
   },
   "$where": [
-    "?orcid <https://w3id.org/fair/3pff/participatedAsParticipantIn> <https://www.tkuhn.org/nanopub-queries/ds-editors-test.html#event> . optional { ?orcid foaf:name ?name . } bind(coalesce(?name, ?orcid) as ?person)."
+    "?orcid <https://w3id.org/fair/3pff/participatedAsParticipantIn> <https://knowledgepixels.com/slides/ucds-20230308.html#event> . optional { ?orcid foaf:name ?name . } bind(coalesce(?name, ?orcid) as ?person)."
   ],
   "$orderby": [ "?orcid" ],
   "grlc": "#+ summary: Getting the Data Science editors\n#+ tags:\n#+   - json\n#+ method: GET\n#+ pagination: 50",
