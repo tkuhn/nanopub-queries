@@ -3,7 +3,7 @@
       "id": "?orcid"
   },
   "$where": [
-    "?orcid <http://purl.org/ontology/bibo/editor> <https://content.iospress.com/journals/data-science/> ."
+    "?orcid <http://purl.org/ontology/bibo/editor> <https://content.iospress.com/journals/data-science/> . optional { ?orcid foaf:name ?name } ."
   ],
   "$orderby": [ "?orcid" ],
   "grlc": "#+ summary: Testing SPARQL Transformer in grlc\n#+ endpoint: http://dbpedia.org/sparql\n#+ tags:\n#+   - json\n#+ method: GET\n#+ pagination: 50",
