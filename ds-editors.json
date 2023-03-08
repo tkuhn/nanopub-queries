@@ -1,16 +1,18 @@
 {
   "proto": {
-      "id": "?orcid"
+      "id": "?orcid",
+      "name": "?name"
   },
   "$where": [
     "?orcid <http://purl.org/ontology/bibo/editor> <https://content.iospress.com/journals/data-science/> . optional { ?orcid foaf:name ?name } ."
   ],
   "$orderby": [ "?orcid" ],
-  "grlc": "#+ summary: Testing SPARQL Transformer in grlc\n#+ endpoint: http://dbpedia.org/sparql\n#+ tags:\n#+   - json\n#+ method: GET\n#+ pagination: 50",
+  "grlc": "#+ summary: Getting the Data Science editors\n#+ endpoint: http://dbpedia.org/sparql\n#+ tags:\n#+   - json\n#+ method: GET\n#+ pagination: 50",
   "$prefixes": {
     "np" : "http://www.nanopub.org/nschema#",
     "npa" : "http://purl.org/nanopub/admin/",
     "npx" : "http://purl.org/nanopub/x/",
-    "dct" : "http://purl.org/dc/terms/"
+    "dct" : "http://purl.org/dc/terms/",
+    "foaf" : "http://xmlns.com/foaf/0.1/"
   }
 }
