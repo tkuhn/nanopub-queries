@@ -1,7 +1,6 @@
 {
   "proto": {
-      "id": "?orcid",
-      "name": "?name"
+      "id": "?orcid"
   },
   "$where": [
     "?orcid <http://purl.org/ontology/bibo/editor> <https://content.iospress.com/journals/data-science/> . optional { ?orcid foaf:name ?name } ."
