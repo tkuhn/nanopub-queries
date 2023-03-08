@@ -1,0 +1,19 @@
+{
+  "proto": {
+      "id": "?orcid",
+      "name": "?name",
+      "person": "?person"
+  },
+  "$where": [
+    "?orcid <https://w3id.org/fair/3pff/participatedAsParticipantIn> <https://www.tkuhn.org/nanopub-queries/ds-editors-test.html#event> . optional { ?orcid foaf:name ?name . } bind(coalesce(?name, ?orcid) as ?person)."
+  ],
+  "$orderby": [ "?orcid" ],
+  "grlc": "#+ summary: Getting the Data Science editors\n#+ tags:\n#+   - json\n#+ method: GET\n#+ pagination: 50",
+  "$prefixes": {
+    "np" : "http://www.nanopub.org/nschema#",
+    "npa" : "http://purl.org/nanopub/admin/",
+    "npx" : "http://purl.org/nanopub/x/",
+    "dct" : "http://purl.org/dc/terms/",
+    "foaf" : "http://xmlns.com/foaf/0.1/"
+  }
+}
