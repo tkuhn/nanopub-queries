@@ -1,12 +1,13 @@
 {
   "proto": {
-      "id": "?orcid"
+      "id": "?latest",
+      "date": "?date"
   },
   "$where": [
-    "?orcid <http://purl.org/ontology/bibo/editor> <https://content.iospress.com/journals/data-science/> . optional { ?orcid foaf:name ?name } ."
+    "graph npa:graph {\n  ?_np_iri npa:hasValidSignatureForPublicKey ?pubkey .\n  ?latest npa:hasValidSignatureForPublicKey ?pubkey .\n  ?latest dct:created ?date .\n}\ngraph npa:networkGraph {\n  ?latest (npx:supersedes)* ?_np_iri .\n}\nfilter not exists {\n  graph npa:networkGraph {\n    ?newer npx:supersedes ?latest .\n  }\n  graph npa:graph {\n    ?newer npa:hasValidSignatureForPublicKey ?pubkey .\n  }\n}\nfilter not exists {\n  graph npa:graph {\n    ?retraction npa:hasHeadGraph ?rh .\n    ?retraction npa:hasValidSignatureForPublicKey ?pubkey .\n  }\n  graph ?rh {\n    ?retraction np:hasAssertion ?ra .\n  }\n  graph ?ra {\n    ?somebody npx:retracts ?latest .\n  }\n}"
   ],
-  "$orderby": [ "?orcid" ],
-  "grlc": "#+ summary: Getting editors of Data Science\n#+ endpoint: https://virtuoso.services.np.trustyuri.net/sparql\n#+ tags:\n#+   - json\n#+ method: GET\n#+ pagination: 50",
+  "$orderby": [ "?date" ],
+  "grlc": "#+ summary: Testing SPARQL Transformer in grlc\n#+ endpoint: http://dbpedia.org/sparql\n#+ tags:\n#+   - json\n#+ method: GET\n#+ pagination: 50",
   "$prefixes": {
     "np" : "http://www.nanopub.org/nschema#",
     "npa" : "http://purl.org/nanopub/admin/",
