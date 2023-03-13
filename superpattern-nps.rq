@@ -1,0 +1,50 @@
+prefix np: <http://www.nanopub.org/nschema#>
+prefix npa: <http://purl.org/nanopub/admin/>
+prefix npx: <http://purl.org/nanopub/x/>
+prefix xsd: <http://www.w3.org/2001/XMLSchema#>
+prefix dct: <http://purl.org/dc/terms/>
+prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+prefix sp: <https://w3id.org/linkflows/superpattern/terms/>
+
+select ?np ?date ?creator ?label where {
+  graph npa:graph {
+    ?np npa:hasHeadGraph ?h .
+    ?np dct:created ?date .
+    ?np npa:hasValidSignatureForPublicKey ?pubkey .
+  }
+  graph ?h {
+    ?np np:hasAssertion ?a .
+    ?np np:hasPublicationInfo ?i .
+  }
+  graph ?a {
+    ?sp a sp:SuperPatternInstance .
+    ?sp rdfs:label ?label .
+  }
+  graph ?i {
+    ?np dct:creator ?creator .
+  }
+  filter not exists {
+    graph npa:graph {
+      ?newversion npa:hasHeadGraph ?nh .
+      ?newversion npa:hasValidSignatureForPublicKey ?pubkey .
+    }
+    graph ?nh {
+      ?newversion np:hasPublicationInfo ?ni .
+    }
+    graph ?ni {
+      ?newversion npx:supersedes ?np .
+    }
+  }
+  filter not exists {
+    graph npa:graph {
+      ?retraction npa:hasHeadGraph ?rh .
+      ?retraction npa:hasValidSignatureForPublicKey ?pubkey .
+    }
+    graph ?rh {
+      ?retraction np:hasAssertion ?ra .
+    }
+    graph ?ra {
+      ?somebody npx:retracts ?np .
+    }
+  }
+}
