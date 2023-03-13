@@ -1,0 +1,22 @@
+{
+  "proto": {
+      "np": "?np",
+      "date": "?date",
+      "creator": "?creator",
+      "label": "?label"
+  },
+  "$where": [
+    "select ?np ?date ?creator ?label where {\n  graph npa:graph {\n    ?np npa:hasHeadGraph ?h .\n    ?np dct:created ?date .\n    ?np npa:hasValidSignatureForPublicKey ?pubkey .\n  }\n  graph ?h {\n    ?np np:hasAssertion ?a .\n    ?np np:hasPublicationInfo ?i .\n  }\n  graph ?a {\n    ?sp a sp:SuperPatternInstance .\n    ?sp rdfs:label ?label .\n  }\n  graph ?i {\n    ?np dct:creator ?creator .\n  }\n  filter not exists {\n    graph npa:graph {\n      ?newversion npa:hasHeadGraph ?nh .\n      ?newversion npa:hasValidSignatureForPublicKey ?pubkey .\n    }\n    graph ?nh {\n      ?newversion np:hasPublicationInfo ?ni .\n    }\n    graph ?ni {\n      ?newversion npx:supersedes ?np .\n    }\n  }\n  filter not exists {\n    graph npa:graph {\n      ?retraction npa:hasHeadGraph ?rh .\n      ?retraction npa:hasValidSignatureForPublicKey ?pubkey .\n    }\n    graph ?rh {\n      ?retraction np:hasAssertion ?ra .\n    }\n    graph ?ra {\n      ?somebody npx:retracts ?np .\n    }\n  }\n}"
+  ],
+  "$orderby": [ "?date" ],
+  "grlc": "#+ summary: Listing the superpattern nanopubs\n#+ tags:\n#+   - json\n#+ method: GET\n#+ pagination: 50",
+  "$prefixes": {
+    "np" : "http://www.nanopub.org/nschema#",
+    "npa" : "http://purl.org/nanopub/admin/",
+    "npx" : "http://purl.org/nanopub/x/",
+    "xsd" : "http://www.w3.org/2001/XMLSchema#",
+    "dct" : "http://purl.org/dc/terms/",
+    "rdfs" : "http://www.w3.org/2000/01/rdf-schema#",
+    "sp" : "https://w3id.org/linkflows/superpattern/terms/"
+  }
+}
